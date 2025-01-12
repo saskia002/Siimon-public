@@ -1,0 +1,17 @@
+[Unit]
+Description=springboot backend service
+After=syslog.target
+
+[Service]
+StandardOutput=journal
+StandardError=journal
+Type=simple
+User=backend
+SuccessExitStatus=143
+WorkingDirectory=/srv/api/backend
+ExecStart=/usr/bin/java -jar -Xlog:gc -XX:+UseZGC -XX:+ZGenerational /srv/api/backend/backend-0.jar
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
